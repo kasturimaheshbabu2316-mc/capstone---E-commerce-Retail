@@ -86,8 +86,10 @@ gantt
     * Status balance across 5 statuses ($\ge 1$ record each): Placed (8), Shipped (8), Delivered (9), Returned (7), Refunded (13).
     * Statistical delay invariant: $6 / 45 = 13.33\%$ delayed orders ($10\% \le 13.33\% \le 30\%$, PASS).
   * [`knowledge_base/`](file:///c:/Users/kastu/Desktop/capstone%20-%20ecommerce/knowledge_base): 12 distinct Markdown policy documents (`01_return_window.md` to `12_escalation_matrix.md`) containing 2–5 sentences with explicit numerical SLAs, return windows, and escalation tiers.
-* **Verification Artifact:**
+  * [`verify_phase_1.py`](file:///c:/Users/kastu/Desktop/capstone%20-%20ecommerce/verify_phase_1.py): Automated 14-point audit suite and unittest runner validating Tasks 1 & 2 invariants and edge cases.
+* **Verification Artifacts:**
   * [`transcripts/task_01_dataset.txt`](file:///c:/Users/kastu/Desktop/capstone%20-%20ecommerce/transcripts/task_01_dataset.txt)
+  * [`transcripts/task_02_knowledge_base.txt`](file:///c:/Users/kastu/Desktop/capstone%20-%20ecommerce/transcripts/task_02_knowledge_base.txt)
 
 ---
 

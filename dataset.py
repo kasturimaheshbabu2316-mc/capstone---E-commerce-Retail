@@ -170,26 +170,50 @@ ORDERS: List[Dict[str, Any]] = generate_orders(seed=42, total_records=45)
 ORDERS_BY_ID: Dict[str, Dict[str, Any]] = {r["record_id"]: r for r in ORDERS}
 
 
+def get_all_orders() -> List[Dict[str, Any]]:
+    """Returns the immutable list of all seeded orders."""
+    return list(ORDERS)
+
+
+def get_order_by_id(record_id: Optional[str]) -> Optional[Dict[str, Any]]:
+    """O(1) transactional lookup for order records by ID."""
+    if not record_id:
+        return None
+    return ORDERS_BY_ID.get(str(record_id).strip().upper())
+
+
 def compute_escalation_score(order: Dict[str, Any]) -> float:
     """
     Computes parametric escalation score S_esc in [0.0, 1.0]:
     S_esc = w1 * delayed_shipment + w2 * (days_since_created / 30)
     w1 = 0.60 (delay impact factor)
     w2 = 0.40 (aging factor)
+    Clamped strictly within [0.0, 1.0] to satisfy EC-07.
     """
+    if not isinstance(order, dict):
+        return 0.0
     w1 = 0.60
     w2 = 0.40
     delay_factor = 1.0 if order.get("delayed_shipment", False) else 0.0
-    aging_factor = min(max(order.get("days_since_created", 0) / 30.0, 0.0), 1.0)
+    try:
+        raw_days = float(order.get("days_since_created", 0))
+    except (ValueError, TypeError):
+        raw_days = 0.0
+    aging_factor = min(max(raw_days / 30.0, 0.0), 1.0)
     return round(w1 * delay_factor + w2 * aging_factor, 4)
 
 
-def check_order_status(record_id: str) -> Dict[str, Any]:
+def check_order_status(record_id: Optional[str]) -> Dict[str, Any]:
     """
     O(1) transactional lookup for Nykaa orders with continuous escalation scoring.
     Escalation threshold: S_esc >= 0.65
+    Implements EC-06 (safe lookup without uncaught exceptions on unseeded IDs).
     """
-    normalized_id = record_id.strip().upper()
+    if not record_id:
+        normalized_id = ""
+    else:
+        normalized_id = str(record_id).strip().upper()
+
     order = ORDERS_BY_ID.get(normalized_id)
 
     if not order:

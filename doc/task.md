@@ -66,6 +66,7 @@
   * `10_damaged_tampered.md`: 48h claim window with photo/video proof.
   * `11_international_shipping.md`: Cross-border shipping in 7–14 days.
   * `12_escalation_matrix.md`: L1 (24h), L2 Logistics (4h, delay >3d), L3 (Fraud/legal).
+* **Verification Transcript:** [`transcripts/task_02_knowledge_base.txt`](file:///c:/Users/kastu/Desktop/capstone%20-%20ecommerce/transcripts/task_02_knowledge_base.txt)
 
 ---
 
