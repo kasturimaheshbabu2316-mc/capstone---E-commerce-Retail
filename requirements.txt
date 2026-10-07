@@ -21,6 +21,9 @@ websockets>=12.0
 pydantic>=2.5.0
 pydantic-settings>=2.1.0
 
+# UI & Frontend
+streamlit>=1.30.0
+
 # Numerical & Data Utilities
 numpy>=1.24.0
 scikit-learn>=1.3.0
