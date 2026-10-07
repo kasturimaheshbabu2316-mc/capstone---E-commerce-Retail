@@ -144,6 +144,7 @@ nykaa-support-agent/
 ## 4. Quickstart & Verification Commands
 
 Activate the virtual environment:
+
 ```powershell
 .\.e-commerce\Scripts\activate.ps1
 ```
@@ -173,24 +174,31 @@ python evaluation/run_judge.py
 ## 5. Running the FastAPI Server
 
 Start the server locally:
+
 ```powershell
 python -m uvicorn api.server:app --host 127.0.0.1 --port 8000
 ```
 
 ### Endpoints
+
 1. **`POST /ask`**
+
    ```bash
    curl -X POST http://127.0.0.1:8000/ask \
      -H "Content-Type: application/json" \
      -d '{"query": "What is the return window for sealed beauty cosmetics?"}'
    ```
+
 2. **`POST /add-document`**
+
    ```bash
    curl -X POST http://127.0.0.1:8000/add-document \
      -H "Content-Type: application/json" \
      -d '{"doc_id": "13_vip_club", "text": "Nykaa VIP members receive complimentary priority shipping."}'
    ```
+
 3. **`WebSocket /ws/chat`**
+
    Connect using any standard WebSocket client to `ws://127.0.0.1:8000/ws/chat`. Graceful disconnections (`1000`) are captured without server crashes.
 
 ---

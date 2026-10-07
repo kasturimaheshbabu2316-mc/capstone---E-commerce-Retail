@@ -1,1 +1,3 @@
+# International Cross-Border Shipping & Customs Policy
+
 Nykaa ships internationally to select countries including the United Arab Emirates, United States, United Kingdom, and Singapore through premium global logistics couriers. International delivery timelines typically range between 7 to 14 business days, subject to customs clearance in the destination territory. Customs duties, local taxes, and import tariffs are billed to the recipient and cannot be reimbursed or borne by Nykaa. Flammable formulations, pressurized aerosols, and nail enamels are prohibited from international air cargo due to IATA aviation regulations.

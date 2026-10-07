@@ -1,1 +1,3 @@
+# Customer Support Escalation Matrix & Priority SLAs
+
 Standard customer support inquiries are resolved within 24 hours via Nykaa automated chat and Level 1 front-line support executives. If an issue remains unresolved or an order suffers shipment delays exceeding 3 days, it automatically escalates to Level 2 Priority Logistics Support with a 4-hour SLA. Critical escalations involving payment fraud, courier tampering, or legal claims route directly to Level 3 Domain Escalation Managers. Customers can track their active escalation ticket status using their registered Nykaa order ID and mobile phone number.
