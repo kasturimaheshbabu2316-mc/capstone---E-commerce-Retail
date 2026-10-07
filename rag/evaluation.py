@@ -105,24 +105,27 @@ def calibrate_threshold(top_k: int = 3) -> Dict[str, Any]:
 
 
 def query_with_grounded_fallback(
-    query_text: str, tau: float = 0.30, top_k: int = 3, strategy: str = "sentence"
+    query_text: str, tau: float = 0.2021, top_k: int = 3, strategy: str = "sentence"
 ) -> Dict[str, Any]:
     """
     Retrieves policy context. Triggers standard refusal if top similarity < tau.
+    Implements EC-03 (OOD Refusal) and EC-04 (Floating-point boundary rounding).
     """
     store = get_vector_store()
     results = store.query(query_text, collection_type=strategy, top_k=top_k)
 
     top_sim = results[0]["similarity"] if results else 0.0
-    if top_sim < tau:
+    # EC-04: Explicit 4-decimal bounded comparison to prevent floating-point boundary oscillation
+    if round(top_sim, 4) < round(tau, 4):
         return {
             "query": query_text,
             "answer": STANDARD_FALLBACK_REFUSAL,
             "status": "FALLBACK_TRIGGERED",
-            "top_similarity": top_sim,
-            "threshold_tau": tau,
+            "top_similarity": round(top_sim, 4),
+            "threshold_tau": round(tau, 4),
             "retrieved_sources": [],
             "chunks": [],
+            "grounded": False,
         }
 
     # Extract unique parent document IDs
@@ -133,10 +136,11 @@ def query_with_grounded_fallback(
         "query": query_text,
         "answer": context_text,
         "status": "RESOLVED",
-        "top_similarity": top_sim,
-        "threshold_tau": tau,
+        "top_similarity": round(top_sim, 4),
+        "threshold_tau": round(tau, 4),
         "retrieved_sources": sources,
         "chunks": results,
+        "grounded": True,
     }
 
 
