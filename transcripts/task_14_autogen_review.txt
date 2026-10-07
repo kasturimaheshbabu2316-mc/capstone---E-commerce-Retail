@@ -1,0 +1,21 @@
+================================================================================
+TASK 14 VERIFICATION: AUTOGEN MULTI-AGENT REVIEW STAGE (ROUNDROBINGROUPCHAT)
+================================================================================
+Review Team: Policy-Compliance-Reviewer Agent + Final-Editor Agent
+Protocol   : RoundRobinGroupChat(max_turns=2)
+Contract   : StructuredMessage[ReviewVerdict]
+
+--- EVALUATION PATHWAY 1: CLEAN APPROVAL (COMPLIANT DRAFT) ---
+Composer Draft : "Nykaa provides a 15-day return window for unopened and sealed Beauty and Personal Care cosmetics from the date of delivery."
+Review Verdict : Approved=True
+Final Output   : "Nykaa provides a 15-day return window for unopened and sealed Beauty and Personal Care cosmetics from the date of delivery."
+Review Reason  : Policy-Compliance-Reviewer confirmed strict policy grounding, valid resolution status, and zero PII leakage. Final-Editor approved draft unchanged. -> PASS
+
+--- EVALUATION PATHWAY 2: ACTIVE REVISION (INJECTED HALLUCINATION) ---
+Composer Draft : "You can return opened cosmetics within 60 days and receive a cash refund at the doorstep upon courier pickup."
+Review Verdict : Approved=False (Flagged deviation)
+Final Output   : "Nykaa provides a 15-day return window for unopened Beauty products and 7 days for Apparel/Footwear. Refunds for Cash on Delivery orders are credited to your bank account or Nykaa Wallet within 3 to 5 business days."
+Review Reason  : Policy-Compliance-Reviewer flagged factual deviation: Flagged hallucinated policy: Nykaa does not provide doorstep cash refunds.. Final-Editor revised payload to conform to official policy. -> PASS (Rewritten to ground truth)
+================================================================================
+ALL TASK 14 AUTOGEN REVIEW INVARIANTS SATISFIED.
+================================================================================

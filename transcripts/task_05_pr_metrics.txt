@@ -1,0 +1,28 @@
+================================================================================
+TASK 5 VERIFICATION: COMPARATIVE RETRIEVAL BENCHMARKING
+================================================================================
+Strategy A: Fixed-Size Window (150 chars, 30 overlap)
+Strategy B: Sentence-Boundary Window (Natural sentences)
+
+--- STRATEGY A (FIXED-SIZE) PER-QUERY ARITHMETIC ---
+[Q1] P = 1/3 = 0.33 | R = 1/1 = 1.00 | Retrieved: ['01_return_window', '02_cod_refund', '09_size_exchange']
+[Q2] P = 1/2 = 0.50 | R = 1/1 = 1.00 | Retrieved: ['02_cod_refund', '03_delivery_sla']
+[Q3] P = 1/2 = 0.50 | R = 1/1 = 1.00 | Retrieved: ['01_return_window', '03_delivery_sla']
+[Q4] P = 1/2 = 0.50 | R = 1/1 = 1.00 | Retrieved: ['01_return_window', '05_warranty_terms']
+[Q5] P = 1/2 = 0.50 | R = 1/1 = 1.00 | Retrieved: ['01_return_window', '09_size_exchange']
+Strategy A Aggregate: Mean Precision = 0.4667, Mean Recall = 1.0000
+
+--- STRATEGY B (SENTENCE-BOUNDARY) PER-QUERY ARITHMETIC ---
+[Q1] P = 1/2 = 0.50 | R = 1/1 = 1.00 | Retrieved: ['01_return_window', '02_cod_refund']
+[Q2] P = 1/2 = 0.50 | R = 1/1 = 1.00 | Retrieved: ['02_cod_refund', '08_payment_failure']
+[Q3] P = 1/2 = 0.50 | R = 1/1 = 1.00 | Retrieved: ['03_delivery_sla', '06_order_cancellation']
+[Q4] P = 1/2 = 0.50 | R = 1/1 = 1.00 | Retrieved: ['01_return_window', '05_warranty_terms']
+[Q5] P = 1/2 = 0.50 | R = 1/1 = 1.00 | Retrieved: ['01_return_window', '09_size_exchange']
+Strategy B Aggregate: Mean Precision = 0.5000, Mean Recall = 1.0000
+
+RECOMMENDATION: Strategy B (Sentence-Boundary)
+Rationale: Sentence-boundary chunking preserves complete semantic statements and avoids
+syntactic truncations across clauses, achieving higher semantic coherence and cleaner parent attribution.
+================================================================================
+ALL TASK 5 PRECISION & RECALL BENCHMARKS SATISFIED.
+================================================================================

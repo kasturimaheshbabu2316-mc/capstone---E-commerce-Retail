@@ -1,0 +1,26 @@
+================================================================================
+TASK 16 VERIFICATION: IDEMPOTENT RESPONSE CACHING & LATENCY METRICS
+================================================================================
+Base Query   : "What is the return window for beauty and cosmetics?"
+Variant Query: "   what IS the  return WINDOW for   beauty and cosmetics?  "
+
+--- RUN 1: COLD EXECUTION (CACHE MISS) ---
+Cache Lookup Result : MISS (Downstream CrewAI pipeline invoked)
+Execution Latency   : 17.880 ms
+Resolution Status   : RESOLVED
+Answer Preview      : Nykaa provides a 15-day return window for unopened and sealed Beauty and Persona...
+
+--- RUN 2: WARM EXECUTION WITH VARIANT QUERY (CACHE HIT) ---
+Cache Lookup Result : HIT (Zero downstream LLM or vector invocations)
+Execution Latency   : 0.004 ms
+Performance Speedup : 4584.7x faster -> PASS
+Payload Equivalence : True -> PASS
+
+--- CACHE TELEMETRY STATS ---
+Cached Entries : 1
+Hits           : 1
+Misses         : 1
+Hit Ratio      : 50.00%
+================================================================================
+ALL TASK 16 IDEMPOTENT CACHING INVARIANTS SATISFIED.
+================================================================================

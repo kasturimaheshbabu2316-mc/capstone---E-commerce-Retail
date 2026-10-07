@@ -1,0 +1,30 @@
+# Virtual Environment
+.e-commerce/
+venv/
+.venv/
+env/
+
+# Python cache & artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local Vector Database & Indices
+chroma_db/
+chroma_storage/
+*.chroma/
+
+# Environment and logs
+.env
+*.log
+logs/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

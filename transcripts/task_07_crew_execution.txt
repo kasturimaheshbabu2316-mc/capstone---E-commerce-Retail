@@ -1,0 +1,34 @@
+================================================================================
+TASK 7 VERIFICATION: CREWAI 3-AGENT ORCHESTRATION WITH MOCK_LLM
+================================================================================
+Agent 1: Retrieval Agent (Role: Policy Specialist, Tool: policy_rag_search)
+Agent 2: Lookup Agent (Role: Order Specialist, Tool: check_order_status [Least Autonomy])
+Agent 3: Response Composer Agent (Role: Synthesizer, Schema: NykaaAgentResponse)
+Engine : Deterministic MOCK_LLM (Offline, Air-Gapped, Telemetry Disabled)
+
+--- RUN 1: POLICY RETRIEVAL PIPELINE ---
+Query             : What is the return window for sealed beauty cosmetics?
+Resolution Status : RESOLVED
+Retrieved Sources : ['01_return_window', '02_cod_refund']
+Answer            : Nykaa provides a 15-day return window for unopened and sealed Beauty and Personal Care cosmetics from the date of delivery. In-store store credits or Nykaa wallet balances are credited instantly within 24 hours of return approval. Apparel and Footwear items are eligible for returns within 7 calendar days provided all original tags and shoe boxes are intact.
+Escalation Flag   : False
+
+--- RUN 2: NON-ESCALATED ORDER LOOKUP PIPELINE ---
+Query             : Track order NYK-1002.
+Resolution Status : RESOLVED
+Order Details     : Status=Shipped, Value=₹2317.33, S_esc=0.0533
+Escalation Flag   : False
+Answer            : Order NYK-1002 (Apparel) is currently 'Shipped'. Order value is ₹2,317.33, placed 4 days ago. The package is on track for delivery (Escalation score: 0.05).
+
+--- RUN 3: ESCALATED ORDER LOOKUP PIPELINE ---
+Query             : Where is order NYK-1008?
+Resolution Status : ESCALATED
+Order Details     : Status=Delivered, Delayed=True, S_esc=0.96
+Escalation Flag   : True -> PASS
+Answer            : Order NYK-1008 (Home) is currently 'Delivered'. Order value is ₹1,889.95, placed 27 days ago. The package is experiencing a logistics delay (Escalation score: 0.96). This order has met the escalation threshold (S_esc >= 0.65) and is transferred to Level 2 Priority Logistics.
+
+--- RUN 4: LEAST AUTONOMY RBAC ENFORCEMENT VERIFICATION ---
+RBAC Check: PASS -> Properly blocked Retrieval Agent: Security Violation: Agent with role 'Retrieval Agent' is not authorized to invoke 'check_order_status'. Only 'Lookup Agent' possesses transactional access.
+================================================================================
+ALL TASK 7 CREWAI ORCHESTRATION INVARIANTS SATISFIED.
+================================================================================

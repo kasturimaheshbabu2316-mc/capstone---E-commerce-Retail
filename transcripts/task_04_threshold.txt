@@ -1,0 +1,36 @@
+================================================================================
+TASK 4 VERIFICATION: GROUNDED RETRIEVAL & EMPIRICAL FALLBACK CALIBRATION
+================================================================================
+Calibrated Fallback Threshold (tau): 0.2021
+Minimum In-Scope Top-1 Similarity : 0.2435
+Maximum Out-Of-Scope Top-1 Sim    : 0.1607
+Empirical Separation Margin       : 0.0828 -> PASS
+
+--- IN-SCOPE POLICY RETRIEVAL TESTS (Requirement: >= 5 tests) ---
+[Q1] Query: "How many days is the return window for beauty and cosmetic products?"
+     Top-1 Sim: 0.2435 >= 0.2021 | Status: RESOLVED | Sources: ['01_return_window', '02_cod_refund']
+[Q2] Query: "When will I receive my refund if I paid via Cash on Delivery (COD)?"
+     Top-1 Sim: 0.3592 >= 0.2021 | Status: RESOLVED | Sources: ['02_cod_refund', '08_payment_failure']
+[Q3] Query: "What are standard delivery timelines and SLAs for metro cities?"
+     Top-1 Sim: 0.2994 >= 0.2021 | Status: RESOLVED | Sources: ['03_delivery_sla', '06_order_cancellation']
+[Q4] Query: "What warranty terms apply to personal styling hair straighteners and tools?"
+     Top-1 Sim: 0.5773 >= 0.2021 | Status: RESOLVED | Sources: ['05_warranty_terms', '01_return_window']
+[Q5] Query: "Can I request a size exchange for apparel or footwear products?"
+     Top-1 Sim: 0.4895 >= 0.2021 | Status: RESOLVED | Sources: ['09_size_exchange', '01_return_window']
+
+--- OUT-OF-SCOPE ADVERSARIAL REFUSAL TESTS (Requirement: >= 1 test) ---
+[OOS1] Query: "How do I purchase cryptocurrency or bitcoin using offshore cloud mining rigs?"
+     Top-1 Sim: 0.0996 < 0.2021 | Status: FALLBACK_TRIGGERED
+     Output: "I do not have sufficient information in the Nykaa policy to answer this question."
+     Standard Refusal Match: PASS
+[OOS2] Query: "What are the passport renewal and visa fees for traveling to France?"
+     Top-1 Sim: 0.1262 < 0.2021 | Status: FALLBACK_TRIGGERED
+     Output: "I do not have sufficient information in the Nykaa policy to answer this question."
+     Standard Refusal Match: PASS
+[OOS3] Query: "What is the capital city of Australia and its current demographic population?"
+     Top-1 Sim: 0.1607 < 0.2021 | Status: FALLBACK_TRIGGERED
+     Output: "I do not have sufficient information in the Nykaa policy to answer this question."
+     Standard Refusal Match: PASS
+================================================================================
+ALL TASK 4 THRESHOLD & REFUSAL INVARIANTS SATISFIED.
+================================================================================

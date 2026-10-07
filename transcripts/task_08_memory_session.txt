@@ -1,0 +1,25 @@
+================================================================================
+TASK 8 VERIFICATION: MULTI-TURN CONVERSATIONAL MEMORY & SESSION ISOLATION
+================================================================================
+
+--- ACTIVE SESSION TESTING (Session ID: nykaa-session-101) ---
+Turn 1 Query   : "Track my order NYK-1002."
+Turn 1 Response: "Order NYK-1002 is Shipped. It was placed 4 days ago with value ₹2,317.33."
+Turn 1 Memory Snapshot:
+  User: Track my order NYK-1002.
+  Ai: Order NYK-1002 is Shipped. It was placed 4 days ago with value ₹2,317.33.
+
+Turn 2 Query (Anaphoric): "Is it delayed and what is the category?"
+Turn 2 Response         : "NYK-1002 belongs to the Apparel category and has no shipping delay recorded."
+Cumulative Session History (Turn 1 + Turn 2):
+  User: Track my order NYK-1002.
+  Ai: Order NYK-1002 is Shipped. It was placed 4 days ago with value ₹2,317.33.
+  User: Is it delayed and what is the category?
+  Ai: NYK-1002 belongs to the Apparel category and has no shipping delay recorded.
+
+--- UNINITIALIZED SESSION ISOLATION TESTING (Session ID: nykaa-session-999-uninitialized) ---
+Querying uninitialized session: len(history) = 0
+State Eradication Across Sessions: PASS (Zero Leakage)
+================================================================================
+ALL TASK 8 CONVERSATIONAL MEMORY & SESSION ISOLATION INVARIANTS SATISFIED.
+================================================================================
