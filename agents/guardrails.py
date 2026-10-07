@@ -22,9 +22,9 @@ PHONE_PATTERNS = [
 ]
 
 CARD_LAST4_PATTERNS = [
-    # Card ending in XXXX or last 4 digits XXXX
-    re.compile(r'(?i)(?:card(?:\s*ending\s*in|\s*last\s*4(?:\s*digits)?|\s*no\.?|\s*number)?:?\s*)([0-9]{4})\b'),
-    re.compile(r'(?i)\bending\s+in\s+([0-9]{4})\b'),
+    # Card ending in XXXX, card ending XXXX, or last 4 digits XXXX
+    re.compile(r'(?i)(?:card(?:\s*ending(?:\s*in)?|\s*last\s*4(?:\s*digits)?|\s*no\.?|\s*number)?:?\s*)([0-9]{4})\b'),
+    re.compile(r'(?i)\bending(?:\s+in)?\s+([0-9]{4})\b'),
 ]
 
 # Prompt Injection Patterns
